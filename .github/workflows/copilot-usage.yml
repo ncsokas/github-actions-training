@@ -11,6 +11,7 @@ jobs:
         with:
           github-token: ${{ secrets.PAT }}
           enterprise: 'ncsokas-github-training'
+          organization: 'github-developer-training-school'
           csv: true
       - uses: austenstone/job-summary@v2.0
         id: copilot-job-summary
