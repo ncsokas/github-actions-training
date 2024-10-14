@@ -7,9 +7,10 @@ jobs:
     name: Copilot Usage Reports
     runs-on: ubuntu-latest
     steps:
-      - uses: austenstone/copilot-usage@v1.2
+      - uses: austenstone/copilot-usage@v4
         with:
           github-token: ${{ secrets.PAT }}
+          enterprise: 'ncsokas-github-training'
           csv: true
       - uses: austenstone/job-summary@v2.0
         id: copilot-job-summary
