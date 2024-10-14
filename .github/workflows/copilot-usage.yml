@@ -1,0 +1,17 @@
+name: Copilot Usage Report
+on:
+  workflow_dispatch:
+
+jobs:
+  run:
+    name: Copilot Usage Reports
+    runs-on: ubuntu-latest
+    steps:
+      - uses: austenstone/copilot-usage@v1.2
+        with:
+          github-token: ${{ secrets.PAT }}
+          csv: true
+      - uses: austenstone/job-summary@v2.0
+        id: copilot-job-summary
+        with:
+          name: copilot-usage-report
