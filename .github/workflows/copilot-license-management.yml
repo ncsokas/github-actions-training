@@ -18,3 +18,20 @@ jobs:
       - name: Save inactive seats JSON to a file
         run: |
           echo '${{ steps.copilot.outputs.inactive-seats }}' | jq . > inactive-seats.json
+
+      - name: Get logins
+        id: getLogins
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          echo "Organization: ${{ github.repository_owner }}"
+          echo "Copilot Beta Team Name: ${{ env.COPILOT_ENABLEMENT_TEAM }}"
+          COPILOT_BETA_USERS=$( gh api /orgs/${{ github.repository_owner }}/teams/${{ env.COPILOT_ENABLEMENT_TEAM }}/members | jq -r '.[].login' )
+          echo "Copilot Beta Users:"
+          echo "$COPILOT_BETA_USERS"
+          
+      - name: Upload inactive seats JSON as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: inactive-seats-json
+          path: inactive-seats.json
