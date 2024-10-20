@@ -1,0 +1,45 @@
+name: Copilot License Management
+on:
+  workflow_dispatch:
+env:
+  COPILOT_ENABLEMENT_TEAM: 'copilot-enablement-users'
+  
+jobs:
+  copilot-inactive-seats:
+    name: Copilot Seats
+    runs-on: ubuntu-latest
+    steps:
+      - uses: austenstone/copilot-license-cleanup@v1.4
+        id: copilot
+        with:
+          github-token: ${{ secrets.PAT }}
+          inactive-days: 40
+
+      - name: Save inactive seats JSON to a file
+        run: |
+          echo '${{ steps.copilot.outputs.inactive-seats }}' | jq . > inactive-seats.json
+
+      - name: Get logins
+        id: getLogins
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          echo "Organization: ${{ github.repository_owner }}"
+          echo "Copilot Beta Team Name: ${{ env.COPILOT_ENABLEMENT_TEAM }}"
+          COPILOT_BETA_USERS=$( gh api /orgs/${{ github.repository_owner }}/teams/${{ env.COPILOT_ENABLEMENT_TEAM }}/members | jq -r '.[].login' )
+          echo "Copilot Beta Users:"
+          echo "$COPILOT_BETA_USERS"
+          
+          INACTIVE_USERS=($( jq -r '.[].assignee.login' inactive-seats.json ))
+          echo "Inactive users to be removed from Copilot Beta Users Team:"
+          for USER in "${INACTIVE_USERS[@]}"; do
+            echo "Login: $USER"
+            ## uncomment the next line to remove users from the Copilot Beta Users so the Copilot license is removed
+            # gh api /orgs/${{ github.repository_owner }}/teams/${{ env.COPILOT_ENABLEMENT_TEAM }}/memberships/$USER
+          done
+          
+      - name: Upload inactive seats JSON as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: inactive-seats-json
+          path: inactive-seats.json
