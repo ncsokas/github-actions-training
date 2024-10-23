@@ -2,7 +2,7 @@ name: Copilot License Management
 on:
   workflow_dispatch:
 env:
-  COPILOT_ENABLEMENT_TEAM: 'copilot-enablement-users'
+  COPILOT_ENABLEMENT_TEAM: 'copilot-users'
   
 jobs:
   copilot-inactive-seats:
