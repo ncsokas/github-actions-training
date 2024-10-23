@@ -1,8 +1,6 @@
 name: Copilot License Management
 on:
   workflow_dispatch:
-env:
-  COPILOT_ENABLEMENT_TEAM: 'copilot-users'
   
 jobs:
   copilot-inactive-seats:
@@ -14,6 +12,7 @@ jobs:
         with:
           github-token: ${{ secrets.PAT }}
           inactive-days: 40
+          enterprise: ncsokas-github-training
 
       - name: Save inactive seats JSON to a file
         run: |
