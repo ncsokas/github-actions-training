@@ -1,8 +1,6 @@
 name: Demo Composite Action Workflow
 
-on:
-  # Manual trigger
-  workflow_dispatch:
+on: [workflow_dispatch]
 
 jobs:
   demo-composite-action:
