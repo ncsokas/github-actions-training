@@ -1,0 +1,21 @@
+name: Custom Permissions Example
+
+on:
+  push:
+    branches:
+      gh-actions-training
+
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Create a pull request
+      run: gh pr create --title "Automated PR" --body "This is an automated PR."
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
