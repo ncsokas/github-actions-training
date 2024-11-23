@@ -1,6 +1,8 @@
 name: Demo Workflow
 
-on: [workflow_dispatch]
+on:
+  # Manual trigger
+  workflow_dispatch:
 
 jobs:
   demo-job:
