@@ -15,7 +15,7 @@ jobs:
 
       # Step 2: Use the composite action
       - name: Run Hello Composite Action
-        uses: ./actions/composite-action/action.yml
+        uses: ./.github/actions/composite-action/action.yml
         with:
           my_name: "GitHub User"
 
