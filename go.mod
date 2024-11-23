@@ -1,3 +1,3 @@
 module github.com/ncsokas/github-actions-training
 
-go 1.22.4
+go 1.19
