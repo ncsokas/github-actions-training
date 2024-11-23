@@ -1,0 +1,23 @@
+name: Demo Workflow
+
+on:
+  # Manual trigger
+  workflow_dispatch:
+
+  # Event trigger: runs on a push to the specific branch
+  push:
+    branches:
+      - gh-actions-training 
+
+jobs:
+  demo-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Run a simple shell command
+      - name: Say Hello
+        run: echo "Hello from GitHub Actions on the main branch!"
