@@ -1,8 +1,6 @@
 name: Demo Workflow
 
-on:
-  # Manual trigger
-  workflow_dispatch:
+on: [workflow_dispatch]
 
   # Event trigger: runs on a push to the specific branch
 #  push:
