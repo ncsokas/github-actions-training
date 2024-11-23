@@ -3,7 +3,7 @@ name: Upload Go test results
 on:
   push:
     branches:
-      gh-actions-training
+      - gh-actions-training
 
 jobs:
   build:
@@ -13,21 +13,35 @@ jobs:
         go-version: [ '1.19', '1.20', '1.21.x' ]
 
     steps:
+      # Step 1: Check out the code
       - uses: actions/checkout@v4
 
+      # Step 2: Set up Go environment
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go-version }}
 
-      - name: Install dependencies
-        run: go get .
+      # Step 3: Ensure the Go module is initialized
+      - name: Initialize Go Module
+        run: |
+          if [ ! -f go.mod ]; then
+            echo "No go.mod file found. Initializing Go module."
+            go mod init github.com/example/repo-name
+          fi
 
+      # Step 4: Install dependencies
+      - name: Install dependencies
+        run: go mod tidy
+
+      # Step 5: Run tests and output results in JSON format
       - name: Test with Go
         run: go test -json > TestResults-${{ matrix.go-version }}.json
 
+      # Step 6: Upload test results as artifacts
       - name: Upload Go test results
         uses: actions/upload-artifact@v4
         with:
           name: Go-results-${{ matrix.go-version }}
           path: TestResults-${{ matrix.go-version }}.json
+
