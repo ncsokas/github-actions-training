@@ -5,9 +5,9 @@ on:
   workflow_dispatch:
 
   # Event trigger: runs on a push to the specific branch
-  push:
-    branches:
-      - gh-actions-training 
+#  push:
+#    branches:
+#      - gh-actions-training 
 
 jobs:
   demo-job:
