@@ -1,9 +1,7 @@
 name: Custom Permissions Example
 
 on:
-  push:
-    branches:
-      gh-actions-training
+  workflow_dispatch:
 
 jobs:
   example-job:
