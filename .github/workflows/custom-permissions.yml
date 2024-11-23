@@ -1,6 +1,8 @@
 name: Custom Permissions Example
 
-on: [workflow_dispatch]
+on:
+  # Manual trigger
+  workflow_dispatch:
 
 jobs:
   example-job:
