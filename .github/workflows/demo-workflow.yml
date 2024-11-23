@@ -20,4 +20,8 @@ jobs:
 
       # Step 2: Run a simple shell command
       - name: Say Hello
-        run: echo "Hello from GitHub Actions on the main branch!"
+        run: echo "Hello from GitHub Actions on the ${{ github.ref_name }} branch!"
+
+      # Step 3: Display GitHub context (optional for debugging/demo)
+      - name: Print GitHub Context
+        run: echo "Running on branch:" ${{ github.ref_name }}
