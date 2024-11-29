@@ -1,0 +1,25 @@
+name: Local Action with Dependencies
+
+on:
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+jobs:
+  run-local-action:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Install dependencies for the local action
+      - name: Install dependencies for local action
+        run: |
+          cd actions/my-local-action
+          npm install
+
+      # Step 3: Run the local action
+      - name: Run My Local Action
+        uses: ./actions/my-local-action # Reference the local action
+        with:
+          message: "Hello from my local action with dependencies!"
