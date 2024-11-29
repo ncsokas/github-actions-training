@@ -1,9 +1,7 @@
 name: Save Artifact Demo
 
 on:
-  push:
-    branches:
-      - gh-actions-training  # Trigger on pushes to the main branch
+  workflow_dispatch: # Allows manual triggering of the workflow
 
 jobs:
   build-and-save:
