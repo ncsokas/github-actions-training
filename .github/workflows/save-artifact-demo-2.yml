@@ -22,9 +22,9 @@ jobs:
 
     - name: Package build artifacts
       run: |
-        mkdir -p artifacts
-        cp myapp artifacts/
-        echo "Artifacts are packaged!"
+        mkdir -p output
+        echo "This is a build artifact!" > output/artifact.txt
+        echo "Build complete!"
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
