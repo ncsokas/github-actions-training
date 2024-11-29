@@ -25,9 +25,11 @@ jobs:
         mkdir -p output
         echo "This is a build artifact!" > output/artifact.txt
         echo "Build complete!"
+        mv myapp output/  # Include the built Go application in the output folder
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: build-artifacts
         path: output/
+        
