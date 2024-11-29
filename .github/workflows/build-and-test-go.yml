@@ -1,9 +1,7 @@
 name: Upload Go test results
 
 on:
-  push:
-    branches:
-      - gh-actions-training
+  workflow_dispatch: 
 
 jobs:
   build:
