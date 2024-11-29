@@ -22,4 +22,5 @@ jobs:
       - name: Run My Local Action
         uses: ./.github/actions/my-local-action # Reference the local action
         with:
-          message: "Hello from my local action with dependencies!"
+          message: "Hello from my local action!"
+          
