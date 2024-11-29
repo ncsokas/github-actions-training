@@ -3,6 +3,9 @@ name: Demo Workflow
 on:
   # Manual trigger
   workflow_dispatch:
+  push:
+    branches:
+      - gh-actions-training
 
 jobs:
   demo-job:
