@@ -28,4 +28,4 @@ jobs:
           push: true # Push the built image to the registry
           tags: |
             ghcr.io/${{ github.actor }}/micronaut-app:latest
-            ghcr.io/${{ github.actor }}/micronaut-app:${{ github.sha::8 }}
+            ghcr.io/${{ github.actor }}/micronaut-app:${{ github.sha }}
