@@ -1,0 +1,9 @@
+{
+  "name": "my-local-action",
+  "version": "1.0.0",
+  "description": "A simple GitHub Action",
+  "main": "index.js",
+  "dependencies": {
+    "@actions/core": "^1.10.0"
+  }
+}
