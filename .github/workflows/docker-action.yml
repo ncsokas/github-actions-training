@@ -2,9 +2,6 @@ name: Docker Build and Push
 
 on:
   workflow_dispatch: # Allows manual triggering of the workflow
-  push:
-    branches:
-      - main # Trigger on pushes to the main branch
 
 jobs:
   docker-build-push:
@@ -31,4 +28,4 @@ jobs:
           push: true # Push the built image to the registry
           tags: |
             ghcr.io/${{ github.actor }}/micronaut-app:latest
-            ghcr.io/${{ github.actor }}/micronaut-app:${SHORT_SHA}
+            ghcr.io/${{ github.actor }}/micronaut-app:${{ github.sha::8 }}
