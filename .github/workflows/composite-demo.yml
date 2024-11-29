@@ -1,0 +1,24 @@
+name: Demo Composite Action Workflow
+
+on:
+  # Manual trigger
+  workflow_dispatch:
+
+jobs:
+  demo-composite-action:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Use the composite action
+      - name: Run Hello Composite Action
+        uses: ./.github/actions/composite-action
+        with:
+          my_name: "${{ github.actor }}" # Fetch the GitHub username dynamically
+
+      # Step 3: Use the composite action's output
+      - name: Print Greeting Output
+        run: echo "The composite action output was:" ${{ steps.greeting.outputs.greeting_message }}
