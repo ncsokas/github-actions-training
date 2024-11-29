@@ -1,4 +1,4 @@
-name: Local Action with Dependencies
+name: Local Action 
 
 on:
   workflow_dispatch: # Allows manual triggering of the workflow
@@ -15,7 +15,7 @@ jobs:
       # Step 2: Install dependencies for the local action
       - name: Install dependencies for local action
         run: |
-          cd actions/my-local-action
+          cd ./github/actions/my-local-action
           npm install
 
       # Step 3: Run the local action
