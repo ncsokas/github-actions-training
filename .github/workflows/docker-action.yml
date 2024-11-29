@@ -2,7 +2,7 @@ name: Docker Build and Push
 
 on:
   workflow_dispatch: # Allows manual triggering of the workflow
-  
+
 jobs:
   docker-build-push:
     runs-on: ubuntu-latest
@@ -23,10 +23,12 @@ jobs:
       # Step 3: Build the Docker image
       - name: Build Docker Image
         run: |
-          docker build -t ghcr.io/${{ github.actor }}/my-app:latest -t ghcr.io/${{ github.actor }}/my-app:${{ github.sha::8 }} .
+          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-8)
+          docker build -t ghcr.io/${{ github.actor }}/my-app:latest -t ghcr.io/${{ github.actor }}/my-app:${SHORT_SHA} .
 
       # Step 4: Push the Docker image
       - name: Push Docker Image
         run: |
+          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-8)
           docker push ghcr.io/${{ github.actor }}/my-app:latest
-          docker push ghcr.io/${{ github.actor }}/my-app:${{ github.sha::8 }}
+          docker push ghcr.io/${{ github.actor }}/my-app:${SHORT_SHA}
