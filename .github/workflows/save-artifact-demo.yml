@@ -1,0 +1,29 @@
+name: Save Artifact Demo
+
+on:
+  push:
+    branches:
+      - gh-actions-training  # Trigger on pushes to the main branch
+
+jobs:
+  build-and-save:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Run a simple build or script
+      - name: Build project
+        run: |
+          mkdir -p output
+          echo "This is a build artifact!" > output/artifact.txt
+          echo "Build complete!"
+
+      # Step 3: Upload the artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: output/
