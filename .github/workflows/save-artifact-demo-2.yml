@@ -9,13 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the code
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-     - name: Set up Go
-       uses: actions/setup-go@v3
-       with:
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
         go-version: '1.19'
 
     - name: Build the project
@@ -32,4 +31,3 @@ jobs:
       with:
         name: build-artifacts
         path: artifacts/
-        
