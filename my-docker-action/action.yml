@@ -1,0 +1,16 @@
+name: "Example Docker Container Action"
+description: "An example GitHub Action running in a Docker container"
+author: "Your Name"
+inputs:
+  example-input:
+    description: "An input string for the action"
+    required: true
+    default: "World"
+outputs:
+  example-output:
+    description: "An example output string"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.example-input }}
