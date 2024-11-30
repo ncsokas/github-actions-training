@@ -21,8 +21,8 @@ jobs:
           "name": "github-actions-training",
           "version": "1.0.0",
           "scripts": {
-            "test": "echo \\"No test specified\\" && exit 0",
-            "build": "echo \\"No build specified\\" && exit 0"
+            "test": "echo \"No test specified\" && exit 0",
+            "build": "echo \"No build specified\" && exit 0"
           }
         }' > package.json
     - name: Use Node.js ${{ matrix.node-version }}
