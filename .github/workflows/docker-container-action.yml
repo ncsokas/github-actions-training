@@ -1,0 +1,16 @@
+name: "Run Example Docker Action"
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Docker Action
+        uses: ./my-docker-action  # Path to the directory containing the action files
+        with:
+          example-input: "GitHub Actions"
