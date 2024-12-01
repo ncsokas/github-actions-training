@@ -9,12 +9,12 @@ env: # Set the secret as an input
 jobs:
   Build:
     runs-on: ubuntu-latest
-    container: gradle:6-jdk11
+    container: gradle:6-jdk11    ## Uses Docker to set the environment for the job
     steps:
       - name: Clone down repository
-        uses: actions/checkout@v4       
+        uses: actions/checkout@v4       ## This is a public action
       - name: Build application
-        run: ci/build-app.sh
+        run: ci/build-app.sh            ## This is a script
       - name: Test
         run: ci/unit-test-app.sh
       - name: Upload repo
