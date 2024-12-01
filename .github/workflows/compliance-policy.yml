@@ -1,0 +1,40 @@
+name: Basic Policy-Compliant Workflow
+
+on:
+  workflow_dispatch:
+  
+permissions:
+  contents: read       # Only allow reading repository contents
+  pull-requests: write # Allow PR-related actions
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Ensure the workflow only runs for PRs within the same repository
+    if: github.event.pull_request.head.repo.full_name == github.repository
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Simulate Build Process
+      - name: Create Demo Build Artifacts
+        run: |
+          echo "::group::Simulating build process"
+          mkdir -p ./build
+          echo "Demo build file content" > ./build/demo-artifact.txt
+          echo "::endgroup::"
+
+      # Step 3: Upload Build Artifact with Retention Policy
+      - name: Upload Demo Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-build-artifact
+          path: ./build
+          retention-days: 30 # Custom retention policy
+
+      # Step 4: Output Confirmation
+      - name: Build Complete
+        run: echo "Build process and artifact upload complete!"
