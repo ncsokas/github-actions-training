@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x] # Test across multiple Node.js versions
+        node-version: [18.x, 20.x, 22.x]
 
     steps:
       # Step 1: Checkout the code
@@ -28,14 +28,18 @@ jobs:
             }
           }' > package.json
 
-      # Step 3: Set up Node.js version from matrix
+      # Step 3: Generate a lock file
+      - name: Generate package-lock.json
+        run: npm install --package-lock-only
+
+      # Step 4: Set up Node.js version from matrix
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm' # Enable npm caching through setup-node
 
-      # Step 4: Cache NPM dependencies
+      # Step 5: Cache NPM dependencies
       - name: Cache NPM Dependencies
         uses: actions/cache@v2
         with:
@@ -44,18 +48,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-${{ matrix.node-version }}-
 
-      # Step 5: Install dependencies
+      # Step 6: Install dependencies
       - name: Install Dependencies
         run: npm install
 
-      # Step 6: Run a clean install
+      # Step 7: Run a clean install
       - name: Clean Install with npm ci
         run: npm ci
 
-      # Step 7: Build the project
+      # Step 8: Build the project
       - name: Build Project
         run: npm run build --if-present
 
-      # Step 8: Run tests
+      # Step 9: Run tests
       - name: Run Tests
         run: npm test
