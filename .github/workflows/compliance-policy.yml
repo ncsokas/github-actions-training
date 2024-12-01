@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     # Ensure the workflow only runs for PRs within the same repository
+    # The if: github.event.pull_request.head.repo.full_name == github.repository condition restricts workflow execution to pull requests originating from the same repository. 
+    # This ensures security by preventing untrusted forks from triggering workflows with access to sensitive resources.
     if: github.event.pull_request.head.repo.full_name == github.repository
 
     steps:
