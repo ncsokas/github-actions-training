@@ -16,15 +16,15 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # Step 2: Create package.json dynamically
+      # Step 2: Create a valid package.json dynamically
       - name: Create package.json
         run: |
           echo '{
             "name": "github-actions-training",
             "version": "1.0.0",
             "scripts": {
-              "test": "echo \\"No test specified\\" && exit 0",
-              "build": "echo \\"No build specified\\" && exit 0"
+              "test": "echo \"No test specified\" && exit 0",
+              "build": "echo \"No build specified\" && exit 0"
             }
           }' > package.json
 
@@ -63,3 +63,4 @@ jobs:
       # Step 9: Run tests
       - name: Run Tests
         run: npm test
+
