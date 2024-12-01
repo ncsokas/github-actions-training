@@ -1,7 +1,9 @@
 name: Basic Policy-Compliant Workflow
 
 on:
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
   
 permissions:
   contents: read       # Only allow reading repository contents
