@@ -3,9 +3,11 @@ name: Demo Workflow
 on:
   # Manual trigger
   workflow_dispatch:
-  push:
-    branches:
-      - gh-actions-training
+#  push:
+#    branches:
+#      - gh-actions-training
+#  schedule:
+#    - cron: '0 0 * * 0' 
 
 jobs:
   demo-job:
