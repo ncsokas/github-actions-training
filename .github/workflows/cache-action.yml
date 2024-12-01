@@ -1,0 +1,61 @@
+name: Node.js CI Caching
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x] # Test across multiple Node.js versions
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Create package.json dynamically
+      - name: Create package.json
+        run: |
+          echo '{
+            "name": "github-actions-training",
+            "version": "1.0.0",
+            "scripts": {
+              "test": "echo \\"No test specified\\" && exit 0",
+              "build": "echo \\"No build specified\\" && exit 0"
+            }
+          }' > package.json
+
+      # Step 3: Set up Node.js version from matrix
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm' # Enable npm caching through setup-node
+
+      # Step 4: Cache NPM dependencies
+      - name: Cache NPM Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ matrix.node-version }}-
+
+      # Step 5: Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 6: Run a clean install
+      - name: Clean Install with npm ci
+        run: npm ci
+
+      # Step 7: Build the project
+      - name: Build Project
+        run: npm run build --if-present
+
+      # Step 8: Run tests
+      - name: Run Tests
+        run: npm test
