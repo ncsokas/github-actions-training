@@ -1,35 +1,33 @@
-name: Build and Save Artifacts
+name: Build and Save Artifacts # The name of the workflow as it will appear in the logs
 
 on:
   workflow_dispatch: # Allows manual triggering of the workflow
 
-
 jobs:
   build-and-save:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Specifies the runner the job will run on
 
     steps:
-    - name: Checkout repository
+    - name: Checkout repository # Step to check out the repository
       uses: actions/checkout@v2
 
-    - name: Set up Go
+    - name: Set up Go # Step to set up the Go programming environment
       uses: actions/setup-go@v3
       with:
-        go-version: '1.19'
+        go-version: '1.19' # Specifies the version of Go to install
 
-    - name: Build the project
+    - name: Build the project # Step to build the Go project
       run: go build -o myapp main.go
 
-    - name: Package build artifacts
+    - name: Package build artifacts # Step to package the build artifacts
       run: |
-        mkdir -p output
-        echo "This is a build artifact!" > output/artifact.txt
-        echo "Build complete!"
-        mv myapp output/  # Include the built Go application in the output folder
+        mkdir -p output 
+        echo "This is a build artifact!" > output/artifact.txt 
+        echo "Build complete!" 
+        mv myapp output/ 
 
-    - name: Upload artifact
+    - name: Upload artifact # Step to upload the build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: build-artifacts
-        path: output/
-        
+        name: build-artifacts # The name of the artifact to be uploaded
+        path: output/ # Path to the directory containing the artifacts
