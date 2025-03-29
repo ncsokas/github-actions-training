@@ -28,3 +28,5 @@ This repository contains a set of exercises to learn Github Actions.
 * [A curated list of awesome things related to GitHub Actions](https://github.com/sdras/awesome-actions)
 * [Githubs own Hands On Labs](https://github.com/ps-actions-sandbox/ActionsFundamentals)
 
+test
+adding something
