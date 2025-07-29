@@ -1,0 +1,37 @@
+name: ARC runner
+# This workflow runs on any push to the main branch
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    
+    steps:
+      - name: 1. Check out the repository code
+        uses: actions/checkout@v4
+
+      - name: 2. Print a build message
+        run: |
+          echo "🚀 Starting the build process on a self-hosted runner..."
+          echo "Runner OS is: $(uname -a)"
+          
+      - name: 3. Simulate a build step
+        run: |
+          echo "Building the application..."
+          sleep 5 # Simulate work
+          echo "Build complete."
+
+  test:
+    needs: build
+    runs-on: self-hosted
+    
+    steps:
+      - name: 1. Check out the repository code
+        uses: actions/checkout@v4
+        
+      - name: 2. Run a test script
+        run: |
+          echo "🧪 Running tests..."
+          sleep 5 # Simulate tests
+          echo "All tests passed!"
